@@ -26,9 +26,7 @@ jobs:
           script: |
             try {
               const fs = require('fs');
-              const path = require('path');
-              const absPath = path.resolve(__dirname, '../../config/schema.json');
-              const jsonString = fs.readFileSync(absPath);
+              const jsonString = fs.readFileSync(./config/schema.json);
               var res = JSON.parse(jsonString)
               core.info(res);
             } catch(err) {
