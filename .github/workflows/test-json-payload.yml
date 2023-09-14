@@ -30,7 +30,6 @@ jobs:
               const jsonString = fs.readFileSync('./config/schema.json');
               core.info(jsonString);
               const res = JSON.parse(jsonString);
-              core.setOutput('str', jsonString);
               core.setOutput('obj', res);
             } catch (err) {
               core.error("Error while reading or parsing the JSON");
@@ -40,10 +39,8 @@ jobs:
         id: result
         uses: actions/github-script@v6
         env:
-          STR: ${{steps.payload.outputs.str}}
-          OBJ: ${{steps.payload.outputs.obj}}
+          OBJ: ${{fromJson(steps.payload.outputs.obj)}}
         with:
           script: |
-            const { STR, OBJ } = process.env;
-            core.info(`str: ${STR}`);
+            const { OBJ } = process.env;
             core.info(`obj: ${OBJ});
