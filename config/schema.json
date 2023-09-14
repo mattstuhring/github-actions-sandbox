@@ -1,5 +1,42 @@
 {
-	"name": "matt",
-	"age": 77,
-	"status": "in progress"	
+	"blocks": [
+		{
+			"type": "header",
+			"text": {
+				"type": "plain_text",
+				"text": "Deployment",
+				"emoji": true
+			}
+		},
+		{
+			"type": "divider"
+		},
+		{
+			"type": "section",
+			"text": {
+				"type": "mrkdwn",
+				"text": "This is a mrkdwn section block :ghost:"
+			}
+		},
+		{
+			"type": "divider"
+		},
+		{
+			"type": "section",
+			"fields": [
+				{
+					"type": "mrkdwn",
+					"text": "*status*\n `${{inputs.status}}`"
+				},
+				{
+					"type": "mrkdwn",
+					"text": "*start*\n `${{inputs.start}}`"
+				},
+				{
+					"type": "mrkdwn",
+					"text": "*finish*\n `${{inputs.finish}}`"
+				}
+			]
+		}
+	]
 }
