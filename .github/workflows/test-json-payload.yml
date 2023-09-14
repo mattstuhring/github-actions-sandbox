@@ -27,8 +27,9 @@ jobs:
             try {
               const fs = require('fs');
               const jsonString = fs.readFileSync('./config/schema.json');
-              var res = JSON.parse(jsonString)
-              core.info(res);
+              core.info('jsonString', jsonString);
+              const res = JSON.parse(jsonString);
+              core.info('res', res);
             } catch (err) {
               core.error("Error while reading or parsing the JSON");
               core.setFailed(err);
