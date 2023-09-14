@@ -28,7 +28,6 @@ jobs:
             try {
               const fs = require('fs');
               const jsonString = fs.readFileSync('./config/schema.json');
-              core.info(jsonString);
               const res = JSON.parse(jsonString);
               core.setOutput('obj', res);
             } catch (err) {
@@ -39,7 +38,7 @@ jobs:
         id: result
         uses: actions/github-script@v6
         env:
-          OBJ: ${{fromJson(steps.payload.outputs.obj)}}
+          OBJ: ${{toJson(steps.payload.outputs.obj)}}
         with:
           script: |
             const { OBJ } = process.env;
