@@ -21,6 +21,7 @@ jobs:
       - name: Install dependencies
         run: npm ci
       - name: read json
+        id: payload
         uses: actions/github-script@v6
         with:
           script: |
@@ -29,8 +30,20 @@ jobs:
               const jsonString = fs.readFileSync('./config/schema.json');
               core.info(jsonString);
               const res = JSON.parse(jsonString);
-              core.info(res);
+              core.setOutput('str', jsonString);
+              core.setOutput('obj', res);
             } catch (err) {
               core.error("Error while reading or parsing the JSON");
               core.setFailed(err);
             }
+      - name: output json
+        id: result
+        uses: actions/github-script@v6
+        env:
+          STR: ${{steps.payload.outputs.str}}
+          OBJ: ${{steps.payload.outputs.obj}}
+        with:
+          script: |
+            const { STR, OBJ } = process.env;
+            core.info(`str: ${STR}`);
+            core.info(`obj: ${OBJ});
